@@ -7,15 +7,32 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+
+type RootStackParamList = {
+  Welcome: undefined;
+  Login: undefined;
+};
+
+type WelcomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Welcome'>;
+
 
 const Welcome: React.FC = () => {
+
+  const navigation = useNavigation<WelcomeScreenNavigationProp>();
+
+  const navigateToLogin = () => {
+    navigation.navigate('Login');
+  };
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
         <View style={styles.header}>
           <Image
             style={styles.himg}
-            source={require("../../../../assets/Nanosemic_logo.png")}
+            source={require("../../assets/Nanosemic_logo.png")}
           />
           <Text style={styles.headerText}>NANO SEMIC</Text>
           <TouchableOpacity>
@@ -25,10 +42,10 @@ const Welcome: React.FC = () => {
         <View style={styles.main}>
           <Image
             style={styles.mainImage}
-            source={require("../../../../assets/Nanosemic_logo.png")}
+            source={require("../../assets/Nanosemic_logo.png")}
           />
-          <TouchableOpacity style={styles.signInButton}>
-            <Text style={styles.signInText}>Sign In</Text>
+          <TouchableOpacity style={styles.signInButton} onPress={navigateToLogin} >
+            <Text style={styles.signInText} >LOGIN</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.footer}>
