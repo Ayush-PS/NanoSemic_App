@@ -9,12 +9,29 @@ import {
     TextInput
 } from "react-native";
 import { useState } from 'react';
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+
+type RootStackParamList = {
+    Welcome: undefined;
+    Login: undefined;
+    Home: undefined;
+  };
+  
+  type HomeScreenNavigationProp = StackNavigationProp<
+    RootStackParamList,
+    "Home"
+  >;
+
+
 
 const Login: React.FC = () => {
-
+    const navigation = useNavigation<HomeScreenNavigationProp>();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-
+    const navigateToHome = () => {
+        navigation.navigate("Home");
+      };
 
     return (
         <SafeAreaView style={styles.safeArea}>
@@ -59,8 +76,9 @@ const Login: React.FC = () => {
                         <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.loginButton}>
+                    <TouchableOpacity style={styles.loginButton}  onPress={navigateToHome}>
                         <Text style={styles.loginButtonText}>LOGIN</Text>
+                       
                     </TouchableOpacity>
 
                     <View style={styles.footer}>
@@ -105,10 +123,10 @@ const styles = StyleSheet.create({
     },
     himg: {
         // Image: Logo WBG;
-        width: 34,
-        height: 34,
+        width: 50,
+        height: 50,
         margin: 5,
-        marginRight: 10,
+        marginRight: 13,
         gap: 0,
         borderRadius: 10,
         opacity: 1,
@@ -122,7 +140,7 @@ const styles = StyleSheet.create({
     headerText: {
 
         fontWeight: "400",
-        fontSize: 16,
+        fontSize: 18,
     },
     imgContainer: {
         // backgroundColor: 'red',
@@ -170,6 +188,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
         marginTop: 40,
         alignItems: "center",
+        marginBottom: 10,
 
     },
     loginButtonText: {
@@ -183,6 +202,6 @@ const styles = StyleSheet.create({
         alignItems: "center",
     },
     footerText: {
-        fontSize: 14
+        fontSize: 16
     }
 })
