@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 import Welcome from "./src/pages/Welcome";
 import Login from "./src/pages/Login";
 import Home from "./src/pages/Home";
+import Register from "./src/pages/Register";
 import { NavigationContainer } from "@react-navigation/native";
 import {
   createStackNavigator,
@@ -13,6 +14,8 @@ import React from "react";
 type RootStackParamList = {
   Welcome: undefined;
   Login: undefined; // Add other screens here as needed
+  Home: undefined;
+  Register: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -37,6 +40,12 @@ export default function App() {
           component={Home}
           options={{ headerShown: false }}
         />
+        <Stack.Screen
+          name="Register"
+          component={Register}
+          options={{ headerShown: false }}
+        />
+
         {/* Add other screens here */}
       </Stack.Navigator>
     </NavigationContainer>

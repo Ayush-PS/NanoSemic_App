@@ -16,7 +16,6 @@ type RootStackParamList = {
     Welcome: undefined;
     Login: undefined;
     Home: undefined;
-    Register: undefined;
 };
 
 type HomeScreenNavigationProp = StackNavigationProp<
@@ -26,15 +25,16 @@ type HomeScreenNavigationProp = StackNavigationProp<
 
 
 
-const Login: React.FC = () => {
+const Register: React.FC = () => {
     const navigation = useNavigation<HomeScreenNavigationProp>();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [name, setName] = useState("");
     const navigateToHome = () => {
         navigation.navigate("Home");
     };
-    const navigateToRegister = () => {
-        navigation.navigate("Register");
+    const navigateToLogin = () => {
+        navigation.navigate("Login");
     };
 
     return (
@@ -61,6 +61,14 @@ const Login: React.FC = () => {
                 <View style={styles.inputContainer}>
                     <TextInput
                         style={styles.input}
+                        placeholder="Name"
+                        placeholderTextColor="#333"
+                        keyboardType="email-address"
+                        value={name}
+                        onChangeText={setName}
+                    />
+                    <TextInput
+                        style={styles.input}
                         placeholder="E-mail"
                         placeholderTextColor="#333"
                         keyboardType="email-address"
@@ -76,18 +84,18 @@ const Login: React.FC = () => {
                         onChangeText={setPassword}
                     />
 
-                    <TouchableOpacity style={styles.forgotPasswordButton}>
+                    {/* <TouchableOpacity style={styles.forgotPasswordButton}>
                         <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
 
                     <TouchableOpacity style={styles.loginButton} onPress={navigateToHome}>
-                        <Text style={styles.loginButtonText}>LOGIN</Text>
+                        <Text style={styles.loginButtonText}>Register</Text>
 
                     </TouchableOpacity>
 
                     <View style={styles.footer}>
-                        <Text style={styles.footerText}>Don't have an account? </Text>
-                        <TouchableOpacity onPress={navigateToRegister} >
+                        <Text style={styles.footerText}>Have an account? </Text>
+                        <TouchableOpacity onPress={navigateToLogin}>
                             <Text
                                 style={{
                                     fontWeight: '500',
@@ -97,7 +105,7 @@ const Login: React.FC = () => {
                                     textDecorationLine: "underline",
                                 }}
                             >
-                                Register
+                                Login
                             </Text>
                         </TouchableOpacity>
                     </View>
@@ -108,7 +116,7 @@ const Login: React.FC = () => {
     )
 }
 
-export default Login;
+export default Register;
 
 const styles = StyleSheet.create({
     safeArea: {
