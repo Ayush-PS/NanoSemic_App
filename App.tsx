@@ -4,6 +4,8 @@ import Welcome from "./src/pages/Welcome";
 import Login from "./src/pages/Login";
 import Home from "./src/pages/Home";
 import Register from "./src/pages/Register";
+import Device from "./src/pages/Device";
+
 import { NavigationContainer } from "@react-navigation/native";
 import {
   createStackNavigator,
@@ -16,6 +18,7 @@ type RootStackParamList = {
   Login: undefined; // Add other screens here as needed
   Home: undefined;
   Register: undefined;
+  Device: { selectedDevice: string }
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -24,7 +27,10 @@ export default function App() {
   return (
     <NavigationContainer>
       <StatusBar style="auto" />
-      <Stack.Navigator initialRouteName="Welcome">
+      <Stack.Navigator initialRouteName="Welcome" screenOptions={{
+        headerShown: false,
+        // default iOS-style horizontal transition
+      }}>
         <Stack.Screen
           name="Welcome"
           component={Welcome}
@@ -43,6 +49,11 @@ export default function App() {
         <Stack.Screen
           name="Register"
           component={Register}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Device"
+          component={Device}
           options={{ headerShown: false }}
         />
 

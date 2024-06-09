@@ -7,12 +7,39 @@ import {
   Image,
   TouchableOpacity,
   Modal,
+  ScrollView,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons"; // Import icons from Expo
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+
+
+type RootStackParamList = {
+  Welcome: undefined;
+  Login: undefined;
+  Home: undefined;
+  Register: undefined;
+  Device: { selectedDevice: string }
+};
+
+type HomeScreenNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  "Home"
+>;
 
 const Home = () => {
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const [hamburgerMenuVisible, setHamburgerMenuVisible] = useState(false);
+  const [selectedDevice, setSelectedDevice] = useState('');
+
+
+  const navigation = useNavigation<HomeScreenNavigationProp>();
+
+  const handleSelectDevice = (device: string) => {
+    setSelectedDevice(device);
+    setDropdownVisible(false);
+    navigation.navigate('Device', { selectedDevice: device });
+  };
 
   const toggleDropdown = () => {
     setDropdownVisible(!dropdownVisible);
@@ -36,22 +63,25 @@ const Home = () => {
       </View>
 
       {hamburgerMenuVisible && (
+
+
         <View style={styles.hamburgerMenuDropdown}>
           <TouchableOpacity style={styles.hamburgerMenuItem}>
-            <Text style={styles.hamburgerMenuText}>Menu Item 1</Text>
+            <Text style={styles.hamburgerMenuText}>Add Device</Text>
+          </TouchableOpacity>
+          {/* <TouchableOpacity style={styles.hamburgerMenuItem}>
+            <Text style={styles.hamburgerMenuText}>Device 2</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.hamburgerMenuItem}>
-            <Text style={styles.hamburgerMenuText}>Menu Item 2</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.hamburgerMenuItem}>
-            <Text style={styles.hamburgerMenuText}>Menu Item 3</Text>
-          </TouchableOpacity>
+            <Text style={styles.hamburgerMenuText}>Device 3</Text>
+          </TouchableOpacity> */}
         </View>
+
       )}
 
       <View style={styles.imgContainer}>
         <Image
-          style={styles.centerImg}
+          style={styles.logoImg}
           source={require("../../assets/test.png")}
         />
         <Image
@@ -59,23 +89,23 @@ const Home = () => {
           source={require("../../assets/Device.png")}
         />
       </View>
+      <View>
 
-      <TouchableOpacity style={styles.addButton} onPress={toggleDropdown}>
-        <Ionicons name="add" size={24} color="black" />
-        <Text style={styles.addButtonText}>ADD DEVICE</Text>
-      </TouchableOpacity>
+        <TouchableOpacity style={styles.addButton} onPress={toggleDropdown}>
+          <Text style={styles.addButtonText}>SELECT DEVICE</Text>
+          {dropdownVisible ? <Ionicons name="arrow-up" size={24} color="black" /> : <Ionicons name="arrow-down" size={24} color="black" />}
+        </TouchableOpacity>
+      </View>
 
       {dropdownVisible && (
         <View style={styles.dropdown}>
-          <TouchableOpacity style={styles.dropdownItem} onPress={toggleDropdown}>
-            <Text style={styles.dropdownText}>Add device 1</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.dropdownItem} onPress={toggleDropdown}>
-            <Text style={styles.dropdownText}>Add device 2</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.dropdownItem} onPress={toggleDropdown}>
-            <Text style={styles.dropdownText}>Add device 3</Text>
-          </TouchableOpacity>
+          <ScrollView style={{ width: '100%' }}>
+            {['device 1', 'device 2', 'device 3', 'device 4', 'device 5', 'device 6'].map((device) => (
+              <TouchableOpacity key={device} style={styles.dropdownItem} onPress={() => handleSelectDevice(device)}>
+                <Text style={styles.dropdownText}>{device}</Text>
+              </TouchableOpacity>
+            ))}
+          </ScrollView>
         </View>
       )}
     </SafeAreaView>
@@ -125,6 +155,7 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
     elevation: 5,
     zIndex: 1,
+
   },
   hamburgerMenuItem: {
     padding: 10,
@@ -141,19 +172,25 @@ const styles = StyleSheet.create({
     flexDirection: "column",
   },
   centerImg: {
-    width: 250,
-    height: 250,
+    margin: 30,
+    width: 150,
+    height: 150,
+  },
+  logoImg: {
+    width: 220,
+    height: 220,
   },
   addButton: {
     flexDirection: "row",
     alignItems: "center",
-    width: 152,
+    width: 200,
     backgroundColor: "#D9D9D9",
     borderRadius: 25,
     paddingVertical: 10,
     paddingHorizontal: 20,
     marginTop: 40,
     marginBottom: 10,
+    justifyContent: "center"
   },
   addButtonText: {
     fontSize: 16,
@@ -164,8 +201,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     borderRadius: 10,
     padding: 10,
+    // margin:10,
     position: "absolute",
-    top: 745,
+    top: 620,
     alignItems: "center",
     width: 200,
     shadowColor: "#000",
@@ -173,7 +211,9 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.8,
     shadowRadius: 2,
     elevation: 5,
-    zIndex: 1,
+    maxHeight: 150,
+    overflow: "hidden",
+    // zIndex: 1,
   },
   dropdownItem: {
     padding: 10,
@@ -181,7 +221,7 @@ const styles = StyleSheet.create({
     borderColor: "#ccc",
     width: "100%",
     alignItems: "center",
-    
+    // backgroundColor: "red"
   },
   dropdownText: {
     fontSize: 16,

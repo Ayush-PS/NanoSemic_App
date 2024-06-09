@@ -46,9 +46,9 @@ const Welcome: React.FC = () => {
               NANO SEMIC
             </Text>
           </View>
-          <TouchableOpacity>
+          {/* <TouchableOpacity>
             <Text style={styles.headerText}>Sign Up</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
         <View style={styles.main}>
           <Image
@@ -107,6 +107,7 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     borderRadius: 40,
+    marginRight: 20,
   },
   headerText: {
     fontSize: 19,
