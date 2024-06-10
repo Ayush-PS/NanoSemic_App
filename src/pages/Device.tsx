@@ -11,7 +11,7 @@ import {
 import { Ionicons } from "@expo/vector-icons"; // Import icons from Expo
 import { useNavigation, useRoute, RouteProp } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-
+import LineGraph from "../components/LineGraph"
 
 type RootStackParamList = {
     Welcome: undefined;
@@ -60,8 +60,19 @@ const Device = () => {
             </View>
 
             <View style={styles.deviceInfoContainer}>
-                <Text style={styles.deviceInfoText}>{selectedDevice.toUpperCase()}</Text>
+                <Text style={styles.deviceInfoText}>{selectedDevice}: Arsenic%</Text>
             </View>
+            <View style={{ width: '100%', height: '100%', justifyContent: 'flex-start', flexDirection: 'column', alignItems: 'center', backgroundColor: '#fff' }}>
+
+                <LineGraph />
+                <TouchableOpacity style={styles.loginButton} >
+                    <Text style={styles.loginButtonText}>More Details</Text>
+
+                </TouchableOpacity>
+            </View>
+            {/* <View style={styles.deviceInfoContainer}>
+                <Text style={styles.deviceInfoText}>Arsenic %</Text>
+            </View> */}
 
         </SafeAreaView>
     );
@@ -135,7 +146,22 @@ const styles = StyleSheet.create({
         padding: 20,
     },
     deviceInfoText: {
+        fontSize: 32,
+        // fontWeight: 'bold',
+    },
+    loginButton: {
+        width: 152,
+        backgroundColor: "#D9D9D9",
+        borderRadius: 25,
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+        marginTop: 40,
+        alignItems: "center",
+        marginBottom: 10,
+
+    },
+    loginButtonText: {
         fontSize: 18,
-        fontWeight: 'bold',
+        color: "black",
     },
 });
