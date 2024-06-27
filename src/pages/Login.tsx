@@ -139,7 +139,6 @@ const styles = StyleSheet.create({
     centerImg: {
         width: 238,
         height: 236,
-        color: 'black',
     },
     headerText: {
 

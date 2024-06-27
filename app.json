@@ -4,7 +4,7 @@
     "slug": "NanoSemic",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/NanoSemic.png",
+    "icon": "./assets/adaptive-icon.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
@@ -18,10 +18,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.ayush_ps.NanoSemic"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "fe7b8319-7b3d-4915-9875-e5938a2b3044"
+      }
     }
   }
 }

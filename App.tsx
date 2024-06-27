@@ -6,6 +6,8 @@ import Home from "./src/pages/Home";
 import Register from "./src/pages/Register";
 import Device from "./src/pages/Device";
 
+
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { NavigationContainer } from "@react-navigation/native";
 import {
   createStackNavigator,
@@ -25,6 +27,7 @@ const Stack = createStackNavigator<RootStackParamList>();
 
 export default function App() {
   return (
+    <GestureHandlerRootView style={{ flex: 1 }}>
     <NavigationContainer>
       <StatusBar style="auto" />
       <Stack.Navigator initialRouteName="Welcome" screenOptions={{
@@ -60,6 +63,7 @@ export default function App() {
         {/* Add other screens here */}
       </Stack.Navigator>
     </NavigationContainer>
+    </GestureHandlerRootView>
   );
 }
 
